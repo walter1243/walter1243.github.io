@@ -63,6 +63,32 @@ linear-gradient(180deg, rgba(6,1,9,0.35) 0%, rgba(6,1,9,0.7) 65%, var(--bg) 100%
 radial-gradient(circle at 15% 20%, rgba(176,38,255,0.25), transparent 55%);
 }
 .hero-content{position:relative;z-index:2;}
+.hero-sound-btn{
+position:absolute;z-index:3;bottom:26px;right:26px;
+width:46px;height:46px;border-radius:50%;
+background:rgba(6,1,9,0.55);border:1px solid var(--border);
+backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);
+display:flex;align-items:center;justify-content:center;
+cursor:pointer;color:var(--text);transition:.25s;
+}
+.hero-sound-btn:hover{border-color:var(--neon);box-shadow:0 0 16px rgba(176,38,255,0.4);}
+.hero-sound-btn svg{width:22px;height:22px;fill:none;stroke:none;}
+.hero-sound-btn svg path{fill:currentColor;}
+.hero-sound-btn .icon-sound{display:none;}
+.hero-sound-btn.on .icon-mute{display:none;}
+.hero-sound-btn.on .icon-sound{display:block;}
+.hero-play-overlay{
+position:absolute;inset:0;z-index:4;
+display:none;flex-direction:column;align-items:center;justify-content:center;gap:14px;
+background:rgba(6,1,9,0.45);cursor:pointer;
+}
+.play-circle{
+width:78px;height:78px;border-radius:50%;
+background:var(--neon);border:none;display:flex;align-items:center;justify-content:center;
+box-shadow:0 0 30px rgba(176,38,255,0.7);cursor:pointer;
+}
+.play-circle svg{width:34px;height:34px;margin-left:4px;}
+.hero-play-overlay span{color:var(--text);font-weight:600;font-size:0.95rem;}
 @keyframes fadeUp{
 from{opacity:0;transform:translateY(24px);}
 to{opacity:1;transform:translateY(0);}
@@ -244,6 +270,10 @@ footer .social-links a{display:inline-block;margin:6px 10px;}
 .whats-panel{width:calc(100vw - 32px);max-width:270px;}
 .whats-toggle-btn{width:52px;height:52px;}
 .whats-toggle-btn svg{width:26px;height:26px;}
+.hero-sound-btn{width:40px;height:40px;bottom:16px;right:16px;}
+.hero-sound-btn svg{width:18px;height:18px;}
+.play-circle{width:64px;height:64px;}
+.play-circle svg{width:28px;height:28px;}
 }
 
 @media(max-width:400px){
@@ -270,10 +300,20 @@ section{padding:50px 5%;}
 </header>
 
 <section class="hero">
-<video class="hero-video" autoplay muted loop playsinline poster="solar-supermercado-cliente.png">
+<video class="hero-video" id="heroVideo" autoplay muted loop playsinline webkit-playsinline="true" preload="auto" poster="solar-supermercado-cliente.png">
 <source src="sim.mp4" type="video/mp4">
 </video>
 <div class="hero-overlay"></div>
+<button class="hero-sound-btn" id="heroSoundBtn" aria-label="Ativar som do video">
+<svg viewBox="0 0 24 24" class="icon-mute"><path d="M5 9v6h4l5 5V4L9 9H5z"/><line x1="16" y1="9" x2="22" y2="15" stroke="currentColor" stroke-width="2"/><line x1="22" y1="9" x2="16" y2="15" stroke="currentColor" stroke-width="2"/></svg>
+<svg viewBox="0 0 24 24" class="icon-sound"><path d="M5 9v6h4l5 5V4L9 9H5z"/><path d="M16.5 12c0-1.77-1.02-3.29-2.5-4.03v8.06c1.48-.74 2.5-2.26 2.5-4.03z"/><path d="M14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/></svg>
+</button>
+<div class="hero-play-overlay" id="heroPlayOverlay">
+<button class="play-circle" aria-label="Reproduzir video">
+<svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="#fff"/></svg>
+</button>
+<span>Toque para reproduzir</span>
+</div>
 <div class="hero-content">
 <p class="tag">Desenvolvedor Full Stack</p>
 <h1>Eu crio sistemas web <span>completos e funcionais</span>.</h1>
@@ -469,6 +509,42 @@ el.style.transitionDelay = (i * 0.08) + 's';
 document.querySelectorAll('.projects-grid .project-card').forEach(function(el, i){
 el.style.transitionDelay = (i * 0.08) + 's';
 });
+
+var heroVideo = document.getElementById('heroVideo');
+var heroSoundBtn = document.getElementById('heroSoundBtn');
+var heroPlayOverlay = document.getElementById('heroPlayOverlay');
+
+function tryPlayHeroVideo(){
+if(!heroVideo) return;
+var p = heroVideo.play();
+if(p !== undefined){
+p.then(function(){
+if(heroPlayOverlay) heroPlayOverlay.style.display = 'none';
+}).catch(function(){
+if(heroPlayOverlay) heroPlayOverlay.style.display = 'flex';
+});
+}
+}
+if(heroVideo){
+tryPlayHeroVideo();
+heroVideo.addEventListener('loadeddata', tryPlayHeroVideo);
+}
+if(heroPlayOverlay){
+heroPlayOverlay.addEventListener('click', function(){
+if(heroVideo){ heroVideo.muted = false; }
+if(heroSoundBtn){ heroSoundBtn.classList.add('on'); }
+tryPlayHeroVideo();
+heroPlayOverlay.style.display = 'none';
+});
+}
+if(heroSoundBtn){
+heroSoundBtn.addEventListener('click', function(){
+if(!heroVideo) return;
+heroVideo.muted = !heroVideo.muted;
+heroSoundBtn.classList.toggle('on', !heroVideo.muted);
+if(heroVideo.paused){ tryPlayHeroVideo(); }
+});
+}
 
 var revealTargets = document.querySelectorAll('.reveal, .skill-card, .project-card');
 var io = new IntersectionObserver(function(entries){
