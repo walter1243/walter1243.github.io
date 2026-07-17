@@ -7,321 +7,382 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --bg:#060109;
-    --bg-alt:#0f0818;
-    --card:#120b1e;
-    --text:#f2eefb;
-    --muted:#a99bc9;
-    --neon:#b026ff;
-    --neon2:#7b2ff7;
-    --neon-soft:rgba(176,38,255,0.15);
-    --border:#2a1b40;
-    --whats:#25D366;
-  }
-  *{margin:0;padding:0;box-sizing:border-box;}
-  html{scroll-behavior:smooth;}
-  body{
-    font-family:'Poppins',Arial,sans-serif;
-    background:var(--bg);
-    color:var(--text);
-    line-height:1.6;
-    background-image:radial-gradient(circle at 15% 10%, rgba(176,38,255,0.12), transparent 40%),
-                      radial-gradient(circle at 85% 30%, rgba(123,47,247,0.12), transparent 40%);
-  }
-  a{color:var(--neon);text-decoration:none;}
-  header{
-    position:sticky;top:0;z-index:10;
-    background:rgba(6,1,9,0.85);
-    backdrop-filter:blur(10px);
-    border-bottom:1px solid var(--border);
-    padding:18px 8%;
-    display:flex;justify-content:space-between;align-items:center;
-  }
-  header .logo{font-weight:800;font-size:1.2rem;letter-spacing:1px;}
-  header .logo span{color:var(--neon);text-shadow:0 0 12px var(--neon);}
-  header nav a{margin-left:24px;color:var(--muted);font-weight:600;font-size:0.95rem;}
-  header nav a:hover{color:var(--neon);}
-  section{padding:90px 8%;}
-  .hero{
-    display:flex;flex-direction:column;align-items:flex-start;
-    min-height:80vh;justify-content:center;
-    border-bottom:1px solid var(--border);
-  }
-  .hero p.tag{
-    color:var(--neon);font-weight:700;letter-spacing:3px;text-transform:uppercase;
-    font-size:0.85rem;margin-bottom:18px;text-shadow:0 0 10px var(--neon-soft);
-  }
-  .hero h1{font-size:3.2rem;margin-bottom:18px;font-weight:800;}
-  .hero h1 span{
-    background:linear-gradient(90deg,var(--neon),#5eead4);
-    -webkit-background-clip:text;background-clip:text;color:transparent;
-  }
-  .hero p.desc{color:var(--muted);max-width:620px;font-size:1.1rem;margin-bottom:36px;}
-  .btn{
-    display:inline-block;padding:14px 30px;border-radius:10px;
-    background:var(--neon);color:#fff;font-weight:700;
-    margin-right:16px;transition:.25s;
-    box-shadow:0 0 20px rgba(176,38,255,0.5);
-    border:1px solid transparent;
-  }
-  .btn:hover{box-shadow:0 0 32px rgba(176,38,255,0.85);transform:translateY(-2px);}
-  .btn.outline{background:transparent;border:1px solid var(--neon);color:var(--text);box-shadow:none;}
-  .btn.outline:hover{background:var(--neon-soft);box-shadow:0 0 20px rgba(176,38,255,0.4);}
-  .btn.small{padding:8px 18px;font-size:0.85rem;margin:0;}
-  .btn.whats{background:var(--whats);box-shadow:0 0 20px rgba(37,211,102,0.5);}
-  .btn.whats:hover{box-shadow:0 0 32px rgba(37,211,102,0.85);}
-  h2.section-title{font-size:2.1rem;margin-bottom:8px;font-weight:800;}
-  h2.section-title span{color:var(--neon);}
-  p.section-sub{color:var(--muted);margin-bottom:52px;}
-  .skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:24px;}
-  .skill-card{
-    background:var(--card);border:1px solid var(--border);border-radius:14px;padding:26px;
-    transition:.25s;
-  }
-  .skill-card:hover{border-color:var(--neon);box-shadow:0 0 24px rgba(176,38,255,0.2);}
-  .skill-card h3{margin-bottom:14px;color:var(--neon);font-size:1.05rem;}
-  .skill-card ul{list-style:none;color:var(--muted);font-size:0.95rem;}
-  .skill-card li{margin-bottom:8px;}
-  .projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:32px;}
-  .project-card{
-    background:var(--card);border:1px solid var(--border);border-radius:16px;
-    overflow:hidden;display:flex;flex-direction:column;transition:.25s;
-  }
-  .project-card:hover{border-color:var(--neon);transform:translateY(-6px);box-shadow:0 10px 40px rgba(176,38,255,0.25);}
-  .project-card.featured{border-color:var(--neon);box-shadow:0 0 30px rgba(176,38,255,0.2);}
-  .project-shot{
-    width:100%;height:200px;overflow:hidden;background:#0a0512;
-    border-bottom:1px solid var(--border);
-    display:flex;align-items:center;justify-content:center;
-  }
-  .project-shot img{width:100%;height:100%;object-fit:cover;object-position:top;display:block;transition:.4s;}
-  .project-shot.empty{color:var(--muted);font-size:0.85rem;}
-  .project-card:hover .project-shot img{transform:scale(1.06);}
-  .project-body{padding:26px;display:flex;flex-direction:column;flex-grow:1;}
-  .badge{
-    display:inline-block;background:var(--neon-soft);color:var(--neon);font-size:0.7rem;
-    font-weight:700;padding:5px 12px;border-radius:20px;margin-bottom:14px;
-    text-transform:uppercase;letter-spacing:1px;width:fit-content;border:1px solid var(--neon);
-  }
-  .badge.muted{background:rgba(255,255,255,0.05);color:var(--muted);border-color:var(--border);}
-  .project-card h3{font-size:1.3rem;margin-bottom:10px;}
-  .project-card p{color:var(--muted);font-size:0.95rem;margin-bottom:18px;flex-grow:1;}
-  .tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px;}
-  .tags span{
-    background:rgba(255,255,255,0.05);color:var(--muted);font-size:0.75rem;padding:4px 10px;border-radius:6px;
-    border:1px solid var(--border);
-  }
-  .project-links a.btn{font-size:0.85rem;padding:10px 20px;}
-  .contact-options{display:flex;flex-wrap:wrap;gap:16px;margin-top:8px;}
-  footer{
-    text-align:center;padding:56px 8%;color:var(--muted);border-top:1px solid var(--border);
-  }
-  .social-links{margin-bottom:16px;}
-  .social-links a{margin:0 12px;font-weight:600;}
-  @media(max-width:600px){
-    .hero h1{font-size:2.1rem;}
-    header nav a{margin-left:14px;font-size:0.85rem;}
-  }
+:root{
+--bg:#060109;
+--bg-alt:#0f0818;
+--card:#120b1e;
+--text:#f2eefb;
+--muted:#a99bc9;
+--neon:#b026ff;
+--neon2:#7b2ff7;
+--neon-soft:rgba(176,38,255,0.15);
+--border:#2a1b40;
+--whats:#25D366;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+font-family:'Poppins',Arial,sans-serif;
+background:var(--bg);
+color:var(--text);
+line-height:1.6;
+background-image:radial-gradient(circle at 15% 10%, rgba(176,38,255,0.12), transparent 40%),
+radial-gradient(circle at 85% 30%, rgba(123,47,247,0.12), transparent 40%);
+overflow-x:hidden;
+}
+a{color:var(--neon);text-decoration:none;}
+header{
+position:sticky;top:0;z-index:10;
+background:rgba(6,1,9,0.85);
+backdrop-filter:blur(10px);
+border-bottom:1px solid var(--border);
+padding:18px 8%;
+display:flex;justify-content:space-between;align-items:center;
+}
+header .logo{font-weight:800;font-size:1.2rem;letter-spacing:1px;}
+header .logo span{color:var(--neon);text-shadow:0 0 12px var(--neon);}
+header nav a{margin-left:24px;color:var(--muted);font-weight:600;font-size:0.95rem;}
+header nav a:hover{color:var(--neon);}
+section{padding:90px 8%;}
+.hero{
+display:flex;flex-direction:column;align-items:flex-start;
+min-height:80vh;justify-content:center;
+border-bottom:1px solid var(--border);
+}
+.hero p.tag{
+color:var(--neon);font-weight:700;letter-spacing:3px;text-transform:uppercase;
+font-size:0.85rem;margin-bottom:18px;text-shadow:0 0 10px var(--neon-soft);
+}
+.hero h1{font-size:3.2rem;margin-bottom:18px;font-weight:800;}
+.hero h1 span{
+background:linear-gradient(90deg,var(--neon),#5eead4);
+-webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.hero p.desc{color:var(--muted);max-width:620px;font-size:1.1rem;margin-bottom:36px;}
+.btn{
+display:inline-block;padding:14px 30px;border-radius:10px;
+background:var(--neon);color:#fff;font-weight:700;
+margin-right:16px;transition:.25s;
+box-shadow:0 0 20px rgba(176,38,255,0.5);
+border:1px solid transparent;
+}
+.btn:hover{box-shadow:0 0 32px rgba(176,38,255,0.85);transform:translateY(-2px);}
+.btn.outline{background:transparent;border:1px solid var(--neon);color:var(--text);box-shadow:none;}
+.btn.outline:hover{background:var(--neon-soft);box-shadow:0 0 20px rgba(176,38,255,0.4);}
+.btn.small{padding:8px 18px;font-size:0.85rem;margin:0;}
+.btn.whats{background:var(--whats);box-shadow:0 0 20px rgba(37,211,102,0.5);}
+.btn.whats:hover{box-shadow:0 0 32px rgba(37,211,102,0.85);}
+h2.section-title{font-size:2.1rem;margin-bottom:8px;font-weight:800;}
+h2.section-title span{color:var(--neon);}
+p.section-sub{color:var(--muted);margin-bottom:52px;}
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:24px;}
+.skill-card{
+background:var(--card);border:1px solid var(--border);border-radius:14px;padding:26px;
+transition:.25s;
+}
+.skill-card:hover{border-color:var(--neon);box-shadow:0 0 24px rgba(176,38,255,0.2);}
+.skill-card h3{margin-bottom:14px;color:var(--neon);font-size:1.05rem;}
+.skill-card ul{list-style:none;color:var(--muted);font-size:0.95rem;}
+.skill-card li{margin-bottom:8px;}
+.projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:32px;}
+.project-card{
+background:var(--card);border:1px solid var(--border);border-radius:16px;
+overflow:hidden;display:flex;flex-direction:column;transition:.25s;
+}
+.project-card:hover{border-color:var(--neon);transform:translateY(-6px);box-shadow:0 10px 40px rgba(176,38,255,0.25);}
+.project-card.featured{border-color:var(--neon);box-shadow:0 0 30px rgba(176,38,255,0.2);}
+.project-shot{
+width:100%;height:200px;overflow:hidden;background:#0a0512;
+border-bottom:1px solid var(--border);
+display:flex;align-items:center;justify-content:center;
+}
+.project-shot img{width:100%;height:100%;object-fit:cover;object-position:top;display:block;transition:.4s;}
+.project-shot.empty{color:var(--muted);font-size:0.85rem;}
+.project-card:hover .project-shot img{transform:scale(1.06);}
+.project-body{padding:26px;display:flex;flex-direction:column;flex-grow:1;}
+.badge{
+display:inline-block;background:var(--neon-soft);color:var(--neon);font-size:0.7rem;
+font-weight:700;padding:5px 12px;border-radius:20px;margin-bottom:14px;
+text-transform:uppercase;letter-spacing:1px;width:fit-content;border:1px solid var(--neon);
+}
+.badge.muted{background:rgba(255,255,255,0.05);color:var(--muted);border-color:var(--border);}
+.project-card h3{font-size:1.3rem;margin-bottom:10px;}
+.project-card p{color:var(--muted);font-size:0.95rem;margin-bottom:18px;flex-grow:1;}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px;}
+.tags span{
+background:rgba(255,255,255,0.05);color:var(--muted);font-size:0.75rem;padding:4px 10px;border-radius:6px;
+border:1px solid var(--border);
+}
+.project-links a.btn{font-size:0.85rem;padding:10px 20px;}
+.contact-options{display:flex;flex-wrap:wrap;gap:16px;margin-top:8px;}
+footer{
+text-align:center;padding:56px 8%;color:var(--muted);border-top:1px solid var(--border);
+}
+.social-links{margin-bottom:16px;}
+.social-links a{margin:0 12px;font-weight:600;}
 
-  /* Botao flutuante do WhatsApp com toggle */
-  .whats-fab{
-    position:fixed;bottom:26px;right:26px;z-index:1000;
-    display:flex;flex-direction:column;align-items:flex-end;gap:14px;
-  }
-  .whats-panel{
-    background:var(--card);border:1px solid var(--neon);border-radius:14px;
-    padding:18px;width:250px;box-shadow:0 0 30px rgba(176,38,255,0.35);
-    display:none;flex-direction:column;gap:10px;
-  }
-  .whats-panel.open{display:flex;}
-  .whats-panel p{color:var(--muted);font-size:0.85rem;}
-  .whats-panel a{
-    display:flex;align-items:center;justify-content:center;gap:8px;
-    padding:10px 14px;border-radius:8px;font-weight:600;font-size:0.9rem;
-  }
-  .whats-panel a.wa{background:var(--whats);color:#fff;}
-  .whats-panel a.mail{background:transparent;border:1px solid var(--neon);color:var(--text);}
-  .whats-toggle-btn{
-    width:60px;height:60px;border-radius:50%;background:var(--whats);
-    display:flex;align-items:center;justify-content:center;cursor:pointer;
-    box-shadow:0 0 24px rgba(37,211,102,0.6);border:none;transition:.25s;
-  }
-  .whats-toggle-btn:hover{transform:scale(1.08);}
-  .whats-toggle-btn svg{width:30px;height:30px;fill:#fff;}
+.nav-toggle{
+display:none;background:none;border:none;color:var(--text);
+font-size:1.7rem;cursor:pointer;line-height:1;padding:4px 6px;
+}
+
+/* Botao flutuante do WhatsApp com toggle */
+.whats-fab{
+position:fixed;bottom:26px;right:26px;z-index:1000;
+display:flex;flex-direction:column;align-items:flex-end;gap:14px;
+}
+.whats-panel{
+background:var(--card);border:1px solid var(--neon);border-radius:14px;
+padding:18px;width:250px;box-shadow:0 0 30px rgba(176,38,255,0.35);
+display:none;flex-direction:column;gap:10px;
+}
+.whats-panel.open{display:flex;}
+.whats-panel p{color:var(--muted);font-size:0.85rem;}
+.whats-panel a{
+display:flex;align-items:center;justify-content:center;gap:8px;
+padding:10px 14px;border-radius:8px;font-weight:600;font-size:0.9rem;
+}
+.whats-panel a.wa{background:var(--whats);color:#fff;}
+.whats-panel a.mail{background:transparent;border:1px solid var(--neon);color:var(--text);}
+.whats-toggle-btn{
+width:60px;height:60px;border-radius:50%;background:var(--whats);
+display:flex;align-items:center;justify-content:center;cursor:pointer;
+box-shadow:0 0 24px rgba(37,211,102,0.6);border:none;transition:.25s;
+}
+.whats-toggle-btn:hover{transform:scale(1.08);}
+.whats-toggle-btn svg{width:30px;height:30px;fill:#fff;}
+
+@media(max-width:900px){
+.projects-grid{grid-template-columns:repeat(auto-fit,minmax(280px,1fr));}
+}
+
+@media(max-width:768px){
+section{padding:70px 6%;}
+.hero{min-height:70vh;}
+.hero h1{font-size:2.4rem;}
+header{padding:16px 6%;}
+.nav-toggle{display:block;}
+header nav{
+display:none;position:absolute;top:100%;left:0;right:0;
+background:var(--bg-alt);flex-direction:column;
+padding:16px 6% 24px;border-bottom:1px solid var(--border);
+box-shadow:0 16px 30px rgba(0,0,0,0.45);
+}
+header nav.open{display:flex;}
+header nav a{margin:0 0 20px 0;font-size:1rem;}
+header nav a:last-child{margin-bottom:0;}
+}
+
+@media(max-width:600px){
+.hero h1{font-size:2.1rem;}
+.hero p.desc{font-size:1rem;}
+.hero > div{display:flex;flex-direction:column;width:100%;gap:12px;}
+.hero .btn{margin-right:0;width:100%;text-align:center;}
+h2.section-title{font-size:1.6rem;}
+p.section-sub{margin-bottom:36px;}
+.skills-grid{gap:18px;}
+.projects-grid{grid-template-columns:1fr;gap:24px;}
+.project-shot{height:180px;}
+.project-body{padding:22px;}
+.contact-options{flex-direction:column;align-items:stretch;}
+.contact-options .btn{width:100%;text-align:center;}
+footer .social-links a{display:inline-block;margin:6px 10px;}
+.whats-fab{bottom:16px;right:16px;}
+.whats-panel{width:calc(100vw - 32px);max-width:270px;}
+.whats-toggle-btn{width:52px;height:52px;}
+.whats-toggle-btn svg{width:26px;height:26px;}
+}
+
+@media(max-width:400px){
+.hero h1{font-size:1.75rem;}
+section{padding:50px 5%;}
+.btn{padding:13px 22px;}
+}
 </style>
 </head>
 <body>
 <header>
-  <div class="logo">WALTER<span>.</span>DEV</div>
-  <nav>
-    <a href="#sobre">Sobre</a>
-    <a href="#skills">Skills</a>
-    <a href="#projetos">Projetos</a>
-    <a href="#contato">Contato</a>
-  </nav>
+<div class="logo">WALTER<span>.</span>DEV</div>
+<button class="nav-toggle" id="navToggle" aria-label="Abrir menu">&#9776;</button>
+<nav id="navMenu">
+<a href="#sobre">Sobre</a>
+<a href="#skills">Skills</a>
+<a href="#projetos">Projetos</a>
+<a href="#contato">Contato</a>
+</nav>
 </header>
 
 <section class="hero">
-  <p class="tag">Desenvolvedor Full Stack</p>
-  <h1>Eu crio sistemas web <span>completos e funcionais</span>.</h1>
-  <p class="desc">Programador focado em construir aplicacoes web de ponta a ponta: lojas, ERPs, sistemas de pedidos e paineis administrativos, usando React, Next.js, TypeScript e Python.</p>
-  <div>
-    <a class="btn" href="#projetos">Ver projetos</a>
-    <a class="btn outline" href="https://github.com/walter1243" target="_blank">GitHub</a>
-  </div>
+<p class="tag">Desenvolvedor Full Stack</p>
+<h1>Eu crio sistemas web <span>completos e funcionais</span>.</h1>
+<p class="desc">Programador focado em construir aplicacoes web de ponta a ponta: lojas, ERPs, sistemas de pedidos e paineis administrativos, usando React, Next.js, TypeScript e Python.</p>
+<div>
+<a class="btn" href="#projetos">Ver projetos</a>
+<a class="btn outline" href="https://github.com/walter1243" target="_blank">GitHub</a>
+</div>
 </section>
 
 <section id="sobre">
-  <h2 class="section-title">Sobre <span>mim</span></h2>
-  <p class="section-sub">Um pouco do que eu faco</p>
-  <p style="max-width:700px;color:var(--muted);font-size:1.05rem;">
-    Sou desenvolvedor e gosto de transformar ideias de negocio em sistemas reais: lojas online, cardapios digitais,
-    paineis administrativos e ferramentas de gestao. Ja construi sistemas completos para supermercado, padaria,
-    restaurante e rifas online, sempre com foco em uma experiencia simples para quem usa e um painel solido para quem administra.
-  </p>
+<h2 class="section-title">Sobre <span>mim</span></h2>
+<p class="section-sub">Um pouco do que eu faco</p>
+<p style="max-width:700px;color:var(--muted);font-size:1.05rem;">
+Sou desenvolvedor e gosto de transformar ideias de negocio em sistemas reais: lojas online, cardapios digitais,
+paineis administrativos e ferramentas de gestao. Ja construi sistemas completos para supermercado, padaria,
+restaurante e rifas online, sempre com foco em uma experiencia simples para quem usa e um painel solido para quem administra.
+</p>
 </section>
 
 <section id="skills">
-  <h2 class="section-title">Skills</h2>
-  <p class="section-sub">Tecnologias que eu uso no dia a dia</p>
-  <div class="skills-grid">
-    <div class="skill-card">
-      <h3>Frontend</h3>
-      <ul>
-        <li>React</li>
-        <li>Next.js (App Router)</li>
-        <li>TypeScript / JavaScript</li>
-        <li>Tailwind CSS</li>
-        <li>Framer Motion</li>
-      </ul>
-    </div>
-    <div class="skill-card">
-      <h3>Backend</h3>
-      <ul>
-        <li>Python (Flask)</li>
-        <li>Node.js</li>
-        <li>APIs REST</li>
-        <li>Autenticacao e sessoes</li>
-      </ul>
-    </div>
-    <div class="skill-card">
-      <h3>Infra e deploy</h3>
-      <ul>
-        <li>Vercel</li>
-        <li>Git e GitHub</li>
-        <li>Variaveis de ambiente</li>
-        <li>Integracao com Pix</li>
-      </ul>
-    </div>
-  </div>
+<h2 class="section-title">Skills</h2>
+<p class="section-sub">Tecnologias que eu uso no dia a dia</p>
+<div class="skills-grid">
+<div class="skill-card">
+<h3>Frontend</h3>
+<ul>
+<li>React</li>
+<li>Next.js (App Router)</li>
+<li>TypeScript / JavaScript</li>
+<li>Tailwind CSS</li>
+<li>Framer Motion</li>
+</ul>
+</div>
+<div class="skill-card">
+<h3>Backend</h3>
+<ul>
+<li>Python (Flask)</li>
+<li>Node.js</li>
+<li>APIs REST</li>
+<li>Autenticacao e sessoes</li>
+</ul>
+</div>
+<div class="skill-card">
+<h3>Infra e deploy</h3>
+<ul>
+<li>Vercel</li>
+<li>Git e GitHub</li>
+<li>Variaveis de ambiente</li>
+<li>Integracao com Pix</li>
+</ul>
+</div>
+</div>
 </section>
 
 <section id="projetos">
-  <h2 class="section-title">Meus <span>Projetos</span></h2>
-  <p class="section-sub">Sistemas reais que eu desenvolvi do zero</p>
-  <div class="projects-grid">
+<h2 class="section-title">Meus <span>Projetos</span></h2>
+<p class="section-sub">Sistemas reais que eu desenvolvi do zero</p>
+<div class="projects-grid">
 
-    <div class="project-card featured">
-      <div class="project-shot">
-        <img src="solar-supermercado-cliente.png" alt="Tela da loja Solar Supermercado">
-      </div>
-      <div class="project-body">
-        <span class="badge">Projeto principal</span>
-        <h3>Solar Supermercado</h3>
-        <p>Aplicacao web mobile-first para vendas via Instagram: loja com checkout em etapas, autenticacao de cliente com cashback e controle de pedidos e entregas.</p>
-        <div class="tags">
-          <span>Next.js</span><span>React</span><span>TypeScript</span><span>Tailwind</span>
-        </div>
-        <div class="project-links">
-          <a class="btn small" href="https://sistema-solar-supermercado.vercel.app/loja" target="_blank">Ver site (cliente)</a>
-        </div>
-      </div>
-    </div>
+<div class="project-card featured">
+<div class="project-shot">
+<img src="solar-supermercado-cliente.png" alt="Tela da loja Solar Supermercado">
+</div>
+<div class="project-body">
+<span class="badge">Projeto principal</span>
+<h3>Solar Supermercado</h3>
+<p>Aplicacao web mobile-first para vendas via Instagram: loja com checkout em etapas, autenticacao de cliente com cashback e controle de pedidos e entregas.</p>
+<div class="tags">
+<span>Next.js</span><span>React</span><span>TypeScript</span><span>Tailwind</span>
+</div>
+<div class="project-links">
+<a class="btn small" href="https://sistema-solar-supermercado.vercel.app/loja" target="_blank">Ver site (cliente)</a>
+</div>
+</div>
+</div>
 
-    <div class="project-card">
-      <div class="project-shot">
-        <img src="sistema-restaurante-cliente.png" alt="Tela do Sistema Restaurante">
-      </div>
-      <div class="project-body">
-        <span class="badge">Delivery</span>
-        <h3>Sistema Restaurante</h3>
-        <p>Sistema completo de restaurante com delivery: cardapio digital, pedidos por mesa e rastreio de entrega.</p>
-        <div class="tags">
-          <span>HTML</span><span>Python</span><span>JavaScript</span>
-        </div>
-        <div class="project-links">
-          <a class="btn small" href="https://sistema-restaurante-sigma.vercel.app" target="_blank">Ver site (cliente)</a>
-        </div>
-      </div>
-    </div>
+<div class="project-card">
+<div class="project-shot">
+<img src="sistema-restaurante-cliente.png" alt="Tela do Sistema Restaurante">
+</div>
+<div class="project-body">
+<span class="badge">Delivery</span>
+<h3>Sistema Restaurante</h3>
+<p>Sistema completo de restaurante com delivery: cardapio digital, pedidos por mesa e rastreio de entrega.</p>
+<div class="tags">
+<span>HTML</span><span>Python</span><span>JavaScript</span>
+</div>
+<div class="project-links">
+<a class="btn small" href="https://sistema-restaurante-sigma.vercel.app" target="_blank">Ver site (cliente)</a>
+</div>
+</div>
+</div>
 
-    <div class="project-card">
-      <div class="project-shot">
-        <img src="sorteiopro-cliente.png" alt="Tela do SorteioPro">
-      </div>
-      <div class="project-body">
-        <span class="badge">Vendas</span>
-        <h3>Sorteiopro</h3>
-        <p>Sistema de rifas online com area do cliente para comprar cotas e integracao de pagamento via Pix.</p>
-        <div class="tags">
-          <span>JavaScript</span><span>CSS</span><span>HTML</span><span>Pix</span>
-        </div>
-        <div class="project-links">
-          <a class="btn small" href="https://sorteiopro-olive.vercel.app" target="_blank">Ver site (cliente)</a>
-        </div>
-      </div>
-    </div>
+<div class="project-card">
+<div class="project-shot">
+<img src="sorteiopro-cliente.png" alt="Tela do SorteioPro">
+</div>
+<div class="project-body">
+<span class="badge">Vendas</span>
+<h3>Sorteiopro</h3>
+<p>Sistema de rifas online com area do cliente para comprar cotas e integracao de pagamento via Pix.</p>
+<div class="tags">
+<span>JavaScript</span><span>CSS</span><span>HTML</span><span>Pix</span>
+</div>
+<div class="project-links">
+<a class="btn small" href="https://sorteiopro-olive.vercel.app" target="_blank">Ver site (cliente)</a>
+</div>
+</div>
+</div>
 
-    <div class="project-card">
-      <div class="project-shot empty">Demo indisponivel no momento</div>
-      <div class="project-body">
-        <span class="badge muted">Gestao</span>
-        <h3>Padaria Solar</h3>
-        <p>Sistema de cardapio e pedidos para padaria com perfis de cliente, admin e cozinha em tempo real.</p>
-        <div class="tags">
-          <span>Next.js</span><span>TypeScript</span><span>Tailwind</span>
-        </div>
-      </div>
-    </div>
+<div class="project-card">
+<div class="project-shot empty">Demo indisponivel no momento</div>
+<div class="project-body">
+<span class="badge muted">Gestao</span>
+<h3>Padaria Solar</h3>
+<p>Sistema de cardapio e pedidos para padaria com perfis de cliente, admin e cozinha em tempo real.</p>
+<div class="tags">
+<span>Next.js</span><span>TypeScript</span><span>Tailwind</span>
+</div>
+</div>
+</div>
 
-  </div>
+</div>
 </section>
 
 <section id="contato">
-  <h2 class="section-title">Vamos <span>conversar?</span></h2>
-  <p class="section-sub">Estou aberto a novos projetos e oportunidades</p>
-  <div class="contact-options">
-    <a class="btn whats" href="https://wa.me/5563991133386" target="_blank">WhatsApp: (63) 99113-3386</a>
-    <a class="btn outline" href="mailto:walterjunnys@gmail.com">walterjunnys@gmail.com</a>
-    <a class="btn outline" href="https://github.com/walter1243" target="_blank">Ver GitHub</a>
-  </div>
+<h2 class="section-title">Vamos <span>conversar?</span></h2>
+<p class="section-sub">Estou aberto a novos projetos e oportunidades</p>
+<div class="contact-options">
+<a class="btn whats" href="https://wa.me/5563991133386" target="_blank">WhatsApp: (63) 99113-3386</a>
+<a class="btn outline" href="mailto:walterjunnys@gmail.com">walterjunnys@gmail.com</a>
+<a class="btn outline" href="https://github.com/walter1243" target="_blank">Ver GitHub</a>
+</div>
 </section>
 
 <footer>
-  <div class="social-links">
-    <a href="https://github.com/walter1243" target="_blank">GitHub</a>
-    <a href="https://wa.me/5563991133386" target="_blank">WhatsApp</a>
-    <a href="mailto:walterjunnys@gmail.com">E-mail</a>
-  </div>
-  <p>Feito com HTML, CSS e bastante cafe.</p>
+<div class="social-links">
+<a href="https://github.com/walter1243" target="_blank">GitHub</a>
+<a href="https://wa.me/5563991133386" target="_blank">WhatsApp</a>
+<a href="mailto:walterjunnys@gmail.com">E-mail</a>
+</div>
+<p>Feito com HTML, CSS e bastante cafe.</p>
 </footer>
 
 <div class="whats-fab">
-  <div class="whats-panel" id="whatsPanel">
-    <p>Fale comigo diretamente:</p>
-    <a class="wa" href="https://wa.me/5563991133386" target="_blank">WhatsApp: (63) 99113-3386</a>
-    <a class="mail" href="mailto:walterjunnys@gmail.com">walterjunnys@gmail.com</a>
-  </div>
-  <button class="whats-toggle-btn" id="whatsToggleBtn" aria-label="Abrir contato via WhatsApp">
-    <svg viewBox="0 0 32 32"><path d="M16.001 3C9.373 3 4 8.373 4 15c0 2.386.7 4.61 1.902 6.48L4 29l7.72-1.87A11.93 11.93 0 0 0 16.001 27C22.63 27 28 21.627 28 15S22.63 3 16.001 3zm0 21.6c-1.98 0-3.83-.55-5.41-1.5l-.39-.23-4.58 1.11 1.13-4.46-.25-.4A9.55 9.55 0 0 1 6.4 15c0-5.3 4.3-9.6 9.6-9.6 5.3 0 9.6 4.3 9.6 9.6 0 5.3-4.3 9.6-9.6 9.6zm5.27-7.19c-.29-.14-1.7-.84-1.96-.93-.26-.1-.46-.14-.65.14-.19.28-.75.93-.92 1.12-.17.19-.34.21-.63.07-.29-.14-1.21-.45-2.31-1.44-.85-.76-1.43-1.7-1.6-1.98-.17-.28-.02-.44.13-.58.13-.13.29-.34.43-.5.14-.17.19-.28.29-.47.1-.19.05-.36-.02-.5-.07-.14-.65-1.57-.89-2.15-.23-.56-.47-.48-.65-.49h-.56c-.19 0-.5.07-.76.36-.26.28-1 1-1 2.43 0 1.43 1.03 2.81 1.17 3 .14.19 2.03 3.1 4.92 4.35.69.3 1.22.48 1.64.61.69.22 1.32.19 1.82.11.55-.08 1.7-.7 1.94-1.37.24-.68.24-1.26.17-1.38-.07-.12-.26-.19-.55-.33z"/></svg>
-  </button>
+<div class="whats-panel" id="whatsPanel">
+<p>Fale comigo diretamente:</p>
+<a class="wa" href="https://wa.me/5563991133386" target="_blank">WhatsApp: (63) 99113-3386</a>
+<a class="mail" href="mailto:walterjunnys@gmail.com">walterjunnys@gmail.com</a>
+</div>
+<button class="whats-toggle-btn" id="whatsToggleBtn" aria-label="Abrir contato via WhatsApp">
+<svg viewBox="0 0 32 32"><path d="M16.001 3C9.373 3 4 8.373 4 15c0 2.386.7 4.61 1.902 6.48L4 29l7.72-1.87A11.93 11.93 0 0 0 16.001 27C22.63 27 28 21.627 28 15S22.63 3 16.001 3zm0 21.6c-1.98 0-3.83-.55-5.41-1.5l-.39-.23-4.58 1.11 1.13-4.46-.25-.4A9.55 9.55 0 0 1 6.4 15c0-5.3 4.3-9.6 9.6-9.6 5.3 0 9.6 4.3 9.6 9.6 0 5.3-4.3 9.6-9.6 9.6zm5.27-7.19c-.29-.14-1.7-.84-1.96-.93-.26-.1-.46-.14-.65.14-.19.28-.75.93-.92 1.12-.17.19-.34.21-.63.07-.29-.14-1.21-.45-2.31-1.44-.85-.76-1.43-1.7-1.6-1.98-.17-.28-.02-.44.13-.58.13-.13.29-.34.43-.5.14-.17.19-.28.29-.47.1-.19.05-.36-.02-.5-.07-.14-.65-1.57-.89-2.15-.23-.56-.47-.48-.65-.49h-.56c-.19 0-.5.07-.76.36-.26.28-1 1-1 2.43 0 1.43 1.03 2.81 1.17 3 .14.19 2.03 3.1 4.92 4.35.69.3 1.22.48 1.64.61.69.22 1.32.19 1.82.11.55-.08 1.7-.7 1.94-1.37.24-.68.24-1.26.17-1.38-.07-.12-.26-.19-.55-.33z"/></svg>
+</button>
 </div>
 
 <script>
-  document.getElementById('whatsToggleBtn').addEventListener('click', function(){
-    document.getElementById('whatsPanel').classList.toggle('open');
-  });
+document.getElementById('whatsToggleBtn').addEventListener('click', function(){
+document.getElementById('whatsPanel').classList.toggle('open');
+});
+
+var navToggle = document.getElementById('navToggle');
+var navMenu = document.getElementById('navMenu');
+navToggle.addEventListener('click', function(){
+navMenu.classList.toggle('open');
+});
+navMenu.querySelectorAll('a').forEach(function(link){
+link.addEventListener('click', function(){
+navMenu.classList.remove('open');
+});
+});
 </script>
 
 </body>
