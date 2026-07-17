@@ -17,6 +17,7 @@
     --neon2:#7b2ff7;
     --neon-soft:rgba(176,38,255,0.15);
     --border:#2a1b40;
+    --whats:#25D366;
   }
   *{margin:0;padding:0;box-sizing:border-box;}
   html{scroll-behavior:smooth;}
@@ -68,6 +69,8 @@
   .btn.outline{background:transparent;border:1px solid var(--neon);color:var(--text);box-shadow:none;}
   .btn.outline:hover{background:var(--neon-soft);box-shadow:0 0 20px rgba(176,38,255,0.4);}
   .btn.small{padding:8px 18px;font-size:0.85rem;margin:0;}
+  .btn.whats{background:var(--whats);box-shadow:0 0 20px rgba(37,211,102,0.5);}
+  .btn.whats:hover{box-shadow:0 0 32px rgba(37,211,102,0.85);}
   h2.section-title{font-size:2.1rem;margin-bottom:8px;font-weight:800;}
   h2.section-title span{color:var(--neon);}
   p.section-sub{color:var(--muted);margin-bottom:52px;}
@@ -110,6 +113,7 @@
     border:1px solid var(--border);
   }
   .project-links a.btn{font-size:0.85rem;padding:10px 20px;}
+  .contact-options{display:flex;flex-wrap:wrap;gap:16px;margin-top:8px;}
   footer{
     text-align:center;padding:56px 8%;color:var(--muted);border-top:1px solid var(--border);
   }
@@ -119,6 +123,32 @@
     .hero h1{font-size:2.1rem;}
     header nav a{margin-left:14px;font-size:0.85rem;}
   }
+
+  /* Botao flutuante do WhatsApp com toggle */
+  .whats-fab{
+    position:fixed;bottom:26px;right:26px;z-index:1000;
+    display:flex;flex-direction:column;align-items:flex-end;gap:14px;
+  }
+  .whats-panel{
+    background:var(--card);border:1px solid var(--neon);border-radius:14px;
+    padding:18px;width:250px;box-shadow:0 0 30px rgba(176,38,255,0.35);
+    display:none;flex-direction:column;gap:10px;
+  }
+  .whats-panel.open{display:flex;}
+  .whats-panel p{color:var(--muted);font-size:0.85rem;}
+  .whats-panel a{
+    display:flex;align-items:center;justify-content:center;gap:8px;
+    padding:10px 14px;border-radius:8px;font-weight:600;font-size:0.9rem;
+  }
+  .whats-panel a.wa{background:var(--whats);color:#fff;}
+  .whats-panel a.mail{background:transparent;border:1px solid var(--neon);color:var(--text);}
+  .whats-toggle-btn{
+    width:60px;height:60px;border-radius:50%;background:var(--whats);
+    display:flex;align-items:center;justify-content:center;cursor:pointer;
+    box-shadow:0 0 24px rgba(37,211,102,0.6);border:none;transition:.25s;
+  }
+  .whats-toggle-btn:hover{transform:scale(1.08);}
+  .whats-toggle-btn svg{width:30px;height:30px;fill:#fff;}
 </style>
 </head>
 <body>
@@ -261,17 +291,38 @@
 <section id="contato">
   <h2 class="section-title">Vamos <span>conversar?</span></h2>
   <p class="section-sub">Estou aberto a novos projetos e oportunidades</p>
-  <div>
-    <a class="btn" href="https://github.com/walter1243" target="_blank">Ver GitHub</a>
+  <div class="contact-options">
+    <a class="btn whats" href="https://wa.me/5563991133386" target="_blank">WhatsApp: (63) 99113-3386</a>
+    <a class="btn outline" href="mailto:walterjunnys@gmail.com">walterjunnys@gmail.com</a>
+    <a class="btn outline" href="https://github.com/walter1243" target="_blank">Ver GitHub</a>
   </div>
 </section>
 
 <footer>
   <div class="social-links">
     <a href="https://github.com/walter1243" target="_blank">GitHub</a>
+    <a href="https://wa.me/5563991133386" target="_blank">WhatsApp</a>
+    <a href="mailto:walterjunnys@gmail.com">E-mail</a>
   </div>
   <p>Feito com HTML, CSS e bastante cafe.</p>
 </footer>
+
+<div class="whats-fab">
+  <div class="whats-panel" id="whatsPanel">
+    <p>Fale comigo diretamente:</p>
+    <a class="wa" href="https://wa.me/5563991133386" target="_blank">WhatsApp: (63) 99113-3386</a>
+    <a class="mail" href="mailto:walterjunnys@gmail.com">walterjunnys@gmail.com</a>
+  </div>
+  <button class="whats-toggle-btn" id="whatsToggleBtn" aria-label="Abrir contato via WhatsApp">
+    <svg viewBox="0 0 32 32"><path d="M16.001 3C9.373 3 4 8.373 4 15c0 2.386.7 4.61 1.902 6.48L4 29l7.72-1.87A11.93 11.93 0 0 0 16.001 27C22.63 27 28 21.627 28 15S22.63 3 16.001 3zm0 21.6c-1.98 0-3.83-.55-5.41-1.5l-.39-.23-4.58 1.11 1.13-4.46-.25-.4A9.55 9.55 0 0 1 6.4 15c0-5.3 4.3-9.6 9.6-9.6 5.3 0 9.6 4.3 9.6 9.6 0 5.3-4.3 9.6-9.6 9.6zm5.27-7.19c-.29-.14-1.7-.84-1.96-.93-.26-.1-.46-.14-.65.14-.19.28-.75.93-.92 1.12-.17.19-.34.21-.63.07-.29-.14-1.21-.45-2.31-1.44-.85-.76-1.43-1.7-1.6-1.98-.17-.28-.02-.44.13-.58.13-.13.29-.34.43-.5.14-.17.19-.28.29-.47.1-.19.05-.36-.02-.5-.07-.14-.65-1.57-.89-2.15-.23-.56-.47-.48-.65-.49h-.56c-.19 0-.5.07-.76.36-.26.28-1 1-1 2.43 0 1.43 1.03 2.81 1.17 3 .14.19 2.03 3.1 4.92 4.35.69.3 1.22.48 1.64.61.69.22 1.32.19 1.82.11.55-.08 1.7-.7 1.94-1.37.24-.68.24-1.26.17-1.38-.07-.12-.26-.19-.55-.33z"/></svg>
+  </button>
+</div>
+
+<script>
+  document.getElementById('whatsToggleBtn').addEventListener('click', function(){
+    document.getElementById('whatsPanel').classList.toggle('open');
+  });
+</script>
 
 </body>
 </html>
