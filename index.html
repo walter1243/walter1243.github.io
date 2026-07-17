@@ -513,6 +513,7 @@ el.style.transitionDelay = (i * 0.08) + 's';
 var heroVideo = document.getElementById('heroVideo');
 var heroSoundBtn = document.getElementById('heroSoundBtn');
 var heroPlayOverlay = document.getElementById('heroPlayOverlay');
+var heroIsPlaying = false;
 
 function tryPlayHeroVideo(){
 if(!heroVideo) return;
@@ -522,12 +523,14 @@ if(p !== undefined){ p.catch(function(){}); }
 if(heroVideo){
 tryPlayHeroVideo();
 heroVideo.addEventListener('playing', function(){
+heroIsPlaying = true;
 if(heroPlayOverlay) heroPlayOverlay.style.display = 'none';
 });
+heroVideo.addEventListener('pause', function(){ heroIsPlaying = false; });
 heroVideo.addEventListener('loadeddata', tryPlayHeroVideo);
 heroVideo.addEventListener('canplay', tryPlayHeroVideo);
 setTimeout(function(){
-if(heroVideo.paused && heroPlayOverlay){ heroPlayOverlay.style.display = 'flex'; }
+if(!heroIsPlaying && heroPlayOverlay){ heroPlayOverlay.style.display = 'flex'; }
 }, 1200);
 ['touchstart','click','scroll'].forEach(function(evt){
 document.addEventListener(evt, function(){ tryPlayHeroVideo(); }, {once:true, passive:true});
@@ -547,7 +550,7 @@ e.stopPropagation();
 if(!heroVideo) return;
 heroVideo.muted = !heroVideo.muted;
 heroSoundBtn.classList.toggle('on', !heroVideo.muted);
-if(heroVideo.paused){ tryPlayHeroVideo(); }
+if(!heroIsPlaying){ tryPlayHeroVideo(); }
 });
 }
 
