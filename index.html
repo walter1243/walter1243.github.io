@@ -122,9 +122,20 @@ text-align:center;padding:56px 8%;color:var(--muted);border-top:1px solid var(--
 .social-links a{margin:0 12px;font-weight:600;}
 
 .nav-toggle{
-display:none;background:none;border:none;color:var(--text);
-font-size:1.7rem;cursor:pointer;line-height:1;padding:4px 6px;
+display:none;background:none;border:none;cursor:pointer;
+padding:8px;width:42px;height:42px;
+flex-direction:column;justify-content:center;align-items:center;gap:6px;
+border-radius:10px;transition:.25s;
 }
+.nav-toggle:hover{background:var(--neon-soft);}
+.nav-toggle .bar{
+display:block;width:24px;height:2px;background:var(--text);border-radius:2px;
+transition:.3s ease;
+}
+.nav-toggle.active{background:var(--neon-soft);box-shadow:0 0 16px rgba(176,38,255,0.35);}
+.nav-toggle.active .bar:nth-child(1){transform:translateY(8px) rotate(45deg);}
+.nav-toggle.active .bar:nth-child(2){opacity:0;}
+.nav-toggle.active .bar:nth-child(3){transform:translateY(-8px) rotate(-45deg);}
 
 /* Botao flutuante do WhatsApp com toggle */
 .whats-fab{
@@ -160,17 +171,29 @@ box-shadow:0 0 24px rgba(37,211,102,0.6);border:none;transition:.25s;
 section{padding:70px 6%;}
 .hero{min-height:70vh;}
 .hero h1{font-size:2.4rem;}
-header{padding:16px 6%;}
-.nav-toggle{display:block;}
+header{padding:16px 6%;position:relative;}
+.nav-toggle{display:flex;}
 header nav{
-display:none;position:absolute;top:100%;left:0;right:0;
-background:var(--bg-alt);flex-direction:column;
-padding:16px 6% 24px;border-bottom:1px solid var(--border);
-box-shadow:0 16px 30px rgba(0,0,0,0.45);
+position:absolute;top:100%;left:0;right:0;
+background:rgba(15,8,24,0.97);
+backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+flex-direction:column;
+padding:8px 6% 20px;border-bottom:1px solid var(--border);
+box-shadow:0 20px 40px rgba(0,0,0,0.5);
+opacity:0;visibility:hidden;transform:translateY(-14px);
+transition:opacity .28s ease, transform .28s ease, visibility .28s;
+pointer-events:none;
 }
-header nav.open{display:flex;}
-header nav a{margin:0 0 20px 0;font-size:1rem;}
-header nav a:last-child{margin-bottom:0;}
+header nav.open{
+opacity:1;visibility:visible;transform:translateY(0);pointer-events:auto;
+}
+header nav a{
+margin:0;padding:15px 6px;font-size:1rem;display:block;
+border-bottom:1px solid rgba(255,255,255,0.07);
+transition:.2s;
+}
+header nav a:last-child{border-bottom:none;}
+header nav a:hover{color:var(--neon);padding-left:12px;}
 }
 
 @media(max-width:600px){
@@ -203,7 +226,11 @@ section{padding:50px 5%;}
 <body>
 <header>
 <div class="logo">WALTER<span>.</span>DEV</div>
-<button class="nav-toggle" id="navToggle" aria-label="Abrir menu">&#9776;</button>
+<button class="nav-toggle" id="navToggle" aria-label="Abrir menu" aria-expanded="false">
+<span class="bar"></span>
+<span class="bar"></span>
+<span class="bar"></span>
+</button>
 <nav id="navMenu">
 <a href="#sobre">Sobre</a>
 <a href="#skills">Skills</a>
@@ -375,13 +402,29 @@ document.getElementById('whatsPanel').classList.toggle('open');
 
 var navToggle = document.getElementById('navToggle');
 var navMenu = document.getElementById('navMenu');
-navToggle.addEventListener('click', function(){
+
+navToggle.addEventListener('click', function(e){
+e.stopPropagation();
 navMenu.classList.toggle('open');
+navToggle.classList.toggle('active');
+var isOpen = navMenu.classList.contains('open');
+navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
 });
+
 navMenu.querySelectorAll('a').forEach(function(link){
 link.addEventListener('click', function(){
 navMenu.classList.remove('open');
+navToggle.classList.remove('active');
+navToggle.setAttribute('aria-expanded', 'false');
 });
+});
+
+document.addEventListener('click', function(e){
+if(!navMenu.contains(e.target) && !navToggle.contains(e.target)){
+navMenu.classList.remove('open');
+navToggle.classList.remove('active');
+navToggle.setAttribute('aria-expanded', 'false');
+}
 });
 </script>
 
