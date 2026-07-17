@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Walter | Desenvolvedor Full Stack</title>
+<style>
+  :root{
+    --bg:#0d1117;
+    --bg-alt:#161b22;
+    --text:#e6edf3;
+          --muted:#9da7b3;
+    --accent:#f5a524;
+          --accent2:#3fb950;
+    --border:#30363d;
+}
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+        font-family:'Segoe UI',Arial,sans-serif;
+    background:var(--bg);
+    color:var(--text);
+    line-height:1.6;
+}
+  a{color:var(--accent);text-decoration:none;}
+  header{
+        position:sticky;top:0;z-index:10;
+    background:rgba(13,17,23,0.9);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--border);
+    padding:18px 8%;
+    display:flex;justify-content:space-between;align-items:center;
+}
+  header .logo{font-weight:700;font-size:1.2rem;letter-spacing:1px;}
+  header nav a{margin-left:24px;color:var(--muted);font-weight:600;}
+  header nav a:hover{color:var(--accent);}
+  section{padding:80px 8%;}
+  .hero{
+        display:flex;flex-direction:column;align-items:flex-start;
+    min-height:80vh;justify-content:center;
+    border-bottom:1px solid var(--border);
+}
+  .hero p.tag{color:var(--accent);font-weight:600;letter-spacing:2px;text-transform:uppercase;font-size:0.85rem;margin-bottom:16px;}
+  .hero h1{font-size:3rem;margin-bottom:16px;}
+  .hero h1 span{color:var(--accent);}
+  .hero p.desc{color:var(--muted);max-width:600px;font-size:1.1rem;margin-bottom:32px;}
+  .btn{
+        display:inline-block;padding:12px 28px;border-radius:8px;
+    background:var(--accent);color:#0d1117;font-weight:700;
+    margin-right:16px;transition:.2s;
+  }
+  .btn:hover{opacity:0.85;}
+  .btn.outline{background:transparent;border:1px solid var(--border);color:var(--text);}
+  .btn.outline:hover{border-color:var(--accent);color:var(--accent);}
+  h2.section-title{font-size:2rem;margin-bottom:8px;}
+  p.section-sub{color:var(--muted);margin-bottom:48px;}
+  .skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:24px;}
+  .skill-card{
+    background:var(--bg-alt);border:1px solid var(--border);border-radius:12px;padding:24px;
+}
+  .skill-card h3{margin-bottom:12px;color:var(--accent);font-size:1.05rem;}
+  .skill-card ul{list-style:none;color:var(--muted);font-size:0.95rem;}
+      .skill-card li{margin-bottom:6px;}
+      .projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:28px;}
+      .project-card{
+    background:var(--bg-alt);border:1px solid var(--border);border-radius:14px;
+    padding:28px;display:flex;flex-direction:column;transition:.2s;
+}
+  .project-card:hover{border-color:var(--accent);transform:translateY(-4px);}
+  .project-card.featured{border-color:var(--accent);}
+  .badge{
+        display:inline-block;background:var(--accent);color:#0d1117;font-size:0.7rem;
+    font-weight:700;padding:4px 10px;border-radius:20px;margin-bottom:14px;
+    text-transform:uppercase;letter-spacing:1px;width:fit-content;
+}
+      .project-card h3{font-size:1.3rem;margin-bottom:10px;}
+  .project-card p{color:var(--muted);font-size:0.95rem;margin-bottom:16px;flex-grow:1;}
+      .tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px;}
+  .tags span{
+        background:#21262d;color:var(--muted);font-size:0.75rem;padding:4px 10px;border-radius:6px;
+}
+      .project-links a{margin-right:16px;font-weight:600;font-size:0.9rem;}
+      footer{
+    text-align:center;padding:48px 8%;color:var(--muted);border-top:1px solid var(--border);
+}
+    .social-links{margin-bottom:16px;}
+  .social-links a{margin:0 12px;font-weight:600;}
+  @media(max-width:600px){
+    .hero h1{font-size:2.1rem;}
+        header nav a{margin-left:14px;font-size:0.85rem;}
+}
+</style>
+</head>
+<body>
+<header>
+      <div class="logo">WALTER<span style="color:#f5a524">.</span>DEV</div>
+  <nav>
+    <a href="#sobre">Sobre</a>
+        <a href="#skills">Skills</a>
+    <a href="#projetos">Projetos</a>
+    <a href="#contato">Contato</a>
+  </nav>
+</header>
+
+    <section class="hero">
+      <p class="tag">Desenvolvedor Full Stack</p>
+  <h1>Eu crio sistemas web <span>completos e funcionais</span>.</h1>
+    <p class="desc">Programador focado em construir aplicacoes web de ponta a ponta: lojas, ERPs, sistemas de pedidos e paineis administrativos, usando React, Next.js, TypeScript e Python.</p>
+  <div>
+    <a class="btn" href="#projetos">Ver projetos</a>
+      <a class="btn outline" href="https://github.com/walter1243" target="_blank">GitHub</a>
+    </div>
+  </section>
+  <section id="sobre">
+    <h2 class="section-title">Sobre mim</h2>
+    <p class="section-sub">Um pouco do que eu faco</p>
+  <p style="max-width:700px;color:var(--muted);font-size:1.05rem;">
+    Sou desenvolvedor e gosto de transformar ideias de negocio em sistemas reais: lojas online, cardapios digitais,
+      paineis administrativos e ferramentas de gestao. Ja construi sistemas completos para supermercado, padaria,
+      restaurante e rifas online, sempre com foco em uma experiencia simples para quem usa e um painel solido para quem administra.
+    </p>
+  </section>
+
+  <section id="skills">
+    <h2 class="section-title">Skills</h2>
+    <p class="section-sub">Tecnologias que eu uso no dia a dia</p>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <h3>Frontend</h3>
+        <ul>
+          <li>React</li>
+          <li>Next.js (App Router)</li>
+          <li>TypeScript / JavaScript</li>
+          <li>Tailwind CSS</li>
+          <li>Framer Motion</li>
+        </ul>
+      </div>
+      <div class="skill-card">
+        <h3>Backend</h3>
+        <ul>
+          <li>Python (Flask)</li>
+          <li>Node.js</li>
+          <li>APIs REST</li>
+          <li>Autenticacao e sessoes</li>
+      </ul>
+    </div>
+    <div class="skill-card">
+      <h3>Infra e deploy</h3>
+      <ul>
+          <li>Vercel</li>
+          <li>Git e GitHub</li>
+        <li>Variaveis de ambiente</li>
+        <li>Integracao com Pix</li>
+      </ul>
+    </div>
+  </div>
+  </section>
+  <section id="projetos">
+    <h2 class="section-title">Projetos</h2>
+    <p class="section-sub">Sistemas que eu desenvolvi do zero</p>
+    <div class="projects-grid">
+
+      <div class="project-card featured">
+        <span class="badge">Projeto principal</span>
+        <h3>Solar Supermercado</h3>
+        <p>Aplicacao web mobile-first para vendas via Instagram: landing page, loja com checkout em etapas, painel administrativo, autenticacao de cliente com cashback e controle de pedidos e entregas.</p>
+      <div class="tags">
+        <span>Next.js</span><span>React</span><span>TypeScript</span><span>Tailwind</span><span>Framer Motion</span>
+      </div>
+        <div class="project-links">
+          <a href="https://github.com/walter1243/Sistema-Solar-Supermercado" target="_blank">Repositorio</a>
+        </div>
+      </div>
+
+      <div class="project-card">
+      <span class="badge">Delivery</span>
+        <h3>Sistema Restaurante</h3>
+        <p>Sistema completo de restaurante com delivery: cardapio digital, painel de administrador, painel do entregador com rastreio de entrega e area super admin.</p>
+        <div class="tags">
+          <span>HTML</span><span>Python</span><span>JavaScript</span>
+        </div>
+        <div class="project-links">
+          <a href="https://sistema-restaurante-sigma.vercel.app" target="_blank">Demo</a>
+          <a href="https://github.com/walter1243/sistema-restaurante" target="_blank">Repositorio</a>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <span class="badge">Vendas</span>
+        <h3>Sorteiopro</h3>
+        <p>Sistema de rifas online com painel administrativo, area do cliente e integracao de pagamento via Pix.</p>
+      <div class="tags">
+        <span>JavaScript</span><span>CSS</span><span>HTML</span><span>Pix</span>
+      </div>
+      <div class="project-links">
+        <a href="https://sorteiopro-olive.vercel.app" target="_blank">Demo</a>
+          <a href="https://github.com/walter1243/Sorteiopro" target="_blank">Repositorio</a>
+        </div>
+      </div>
+
+      <div class="project-card">
+        <span class="badge">Gestao</span>
+        <h3>Padaria Solar</h3>
+        <p>Sistema de cardapio e pedidos para padaria com tres perfis: cliente (ve cardapio e faz pedido), admin (gerencia cardapio) e cozinha (acompanha pedidos em tempo real).</p>
+        <div class="tags">
+          <span>Next.js</span><span>TypeScript</span><span>Tailwind</span>
+        </div>
+        <div class="project-links">
+          <a href="https://github.com/walter1243/sistema-Padaria-Solar" target="_blank">Repositorio</a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+  <section id="contato">
+  <h2 class="section-title">Vamos conversar?</h2>
+  <p class="section-sub">Estou aberto a novos projetos e oportunidades</p>
+  <div>
+    <a class="btn" href="https://github.com/walter1243" target="_blank">Ver GitHub</a>
+  </div>
+</section>
+<footer>
+  <div class="social-links">
+    <a href="https://github.com/walter1243" target="_blank">GitHub</a>
+  </div>
+  <p>Feito com HTML, CSS e bastante cafe.</p>
+</footer>
+</body>
+</html>
